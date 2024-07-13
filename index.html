@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/konva@9.3.12/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva Custom Shape Demo</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+    <script>
+      var stage = new Konva.Stage({
+        container: 'container',
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+
+      var layer = new Konva.Layer();
+
+      /*
+       * create a triangle shape by defining a
+       * drawing function which draws a triangle
+       */
+      var mask = new Konva.Shape({
+        sceneFunc: function(ctx, shape) {
+          ctx.beginPath();
+          ctx.rect(0,0,500, 500)
+          ctx.rect(100,100,100, 100)
+          ctx.closePath();
+          ctx.fillShape(shape);
+        },
+        fill: 'rgba(0, 0, 0, 0.5)',
+		fillRule: 'evenodd',
+      });
+	  mask.on('click', ()=>{
+		console.log('click mask');
+	  })
+
+      // add the triangle shape to the layer
+      layer.add(mask);
+
+      // add the layer to the stage
+      stage.add(layer);
+    </script>
+  </body>
+</html>
