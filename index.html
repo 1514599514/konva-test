@@ -25,11 +25,6 @@
       });
 
       var layer = new Konva.Layer();
-
-      /*
-       * create a triangle shape by defining a
-       * drawing function which draws a triangle
-       */
       var mask = new Konva.Shape({
         sceneFunc: function(ctx, shape) {
           ctx.beginPath();
@@ -41,14 +36,14 @@
         fill: 'rgba(0, 0, 0, 0.5)',
 		fillRule: 'evenodd',
       });
-	  mask.on('click', ()=>{
-		console.log('click mask');
+
+	  // 空白区域也接受了点击事件
+	  // The blank area also accepted click events
+	  mask.on('click', e=>{
+		console.log('click mask', e.evt.offsetX, e.evt.offsetY);
 	  })
 
-      // add the triangle shape to the layer
       layer.add(mask);
-
-      // add the layer to the stage
       stage.add(layer);
     </script>
   </body>
